@@ -1,5 +1,9 @@
 function Movie() {
-    return <div>Movie</div>
+    return (
+        <>
+            <h1>Movie List</h1>
+        </>
+    )
 }
 
 export default Movie

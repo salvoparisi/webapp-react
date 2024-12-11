@@ -1,8 +1,9 @@
 import './App.css'
-import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css"
+import React from "react"
 import Home from "./pages/Home.jsx"
 import Movie from "./pages/Movie.jsx"
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
 
