@@ -17,8 +17,7 @@ function MovieReview({ onReviewsLoaded }) {
                 setReviews(data);
                 onReviewsLoaded(data);
             })
-            .catch((error) => console.error(error));
-    }, [id, onReviewsLoaded]);
+    }, []);
 
     return null;
 }

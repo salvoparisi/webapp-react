@@ -42,13 +42,7 @@ const show = (req, res) => {
 const review = (req, res) => {
     const id = req.params.id
 
-    const sqlReviews = `
-    SELECT reviews.*
-    FROM \`db-webapp\`.movies
-    JOIN \`db-webapp\`.reviews
-    ON reviews.movie_id = movies.id
-    WHERE movies.id = ?
-    `
+    const sqlReviews = `SELECT * From reviews WHERE movie_id=?`
 
     connection.query(sqlReviews, [id], (err, reviewResults) => {
         if (err) {

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import MovieSingle from '../components/MovieSingle.jsx';
+import React, { useState } from 'react';
+import MovieList from '../components/MovieList.jsx';
 import MovieReview from '../components/MovieReview.jsx';
 import { NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function Movie() {
+    const { id } = useParams();
     const [movie, setMovie] = useState(null);
     const [reviews, setReviews] = useState([]);
 
-    const handleMovieLoaded = (movieData) => {
+    const handleMoviesLoaded = (movieData) => {
         setMovie(movieData);
     };
 
@@ -15,18 +17,19 @@ function Movie() {
         setReviews(reviewsData);
     };
 
+
     return (
         <div className="container">
-            <MovieSingle onMovieLoaded={handleMovieLoaded} />
+            <MovieList onMoviesLoaded={handleMoviesLoaded} />
             <MovieReview onReviewsLoaded={handleReviewsLoaded} />
 
             {movie ? (
                 <>
-                    <h1 className="mb-3">{movie[0].title}</h1>
-                    <p><strong>Director:</strong> {movie[0].director}</p>
-                    <p><strong>Genre:</strong> {movie[0].genre}</p>
-                    <p><strong>Abstract:</strong> {movie[0].abstract}</p>
-                    <p><strong>Release:</strong> {movie[0].release_year}</p>
+                    <h1 className="mb-3">{movie[id - 1].title}</h1>
+                    <p><strong>Director:</strong> {movie[id - 1].director}</p>
+                    <p><strong>Genre:</strong> {movie[id - 1].genre}</p>
+                    <p><strong>Abstract:</strong> {movie[id - 1].abstract}</p>
+                    <p><strong>Release:</strong> {movie[id - 1].release_year}</p>
 
                     <h2>Reviews</h2>
                     {reviews.length > 0 ? (

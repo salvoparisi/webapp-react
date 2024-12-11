@@ -15,9 +15,6 @@ function MovieList({ onMoviesLoaded }) {
                 setMovies(data);
                 onMoviesLoaded(data);
             })
-            .catch((error) => {
-                console.error('Errore:', error);
-            });
     }, []);
 
     return null;
