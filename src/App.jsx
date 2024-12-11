@@ -1,5 +1,6 @@
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+import { FilmProvider } from './contexts/FilmContext'
 import React from "react"
 import Home from "./pages/Home.jsx"
 import Movie from "./pages/Movie.jsx"
@@ -9,14 +10,16 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path=":id" element={<Movie />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <FilmProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path=":id" element={<Movie />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </FilmProvider>
     </>
   )
 }

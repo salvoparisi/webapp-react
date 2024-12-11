@@ -1,7 +1,14 @@
-import { movies } from "../components/MovieList"
-import { Link, NavLink } from 'react-router-dom'
+import { movies } from "../components/MovieList";
+import { NavLink } from 'react-router-dom';
+import { useFilmContext } from '../contexts/FilmContext';
 
 function Home() {
+    const { setSelectedFilmId } = useFilmContext();
+
+    const handleFilmSelect = (id) => {
+        setSelectedFilmId(id);
+    };
+
     return (
         <>
             <h1 className="text-center bg-primary text-white py-3">Home</h1>
@@ -15,15 +22,20 @@ function Home() {
                                 <div className="abstract px-2">{film.abstract}</div>
                                 <div className="d-flex justify-content-between">
                                     <div className="btn btn-warning">{film.genre}</div>
-                                    <NavLink to={`/${film.id}`} className="btn btn-primary">Scopri</NavLink>
+                                    <NavLink
+                                        to={`/${film.id}`}
+                                        className="btn btn-primary"
+                                        onClick={() => handleFilmSelect(film.id)}
+                                    >
+                                        Scopri
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>)}
                 </div>
             </div>
-
         </>
-    )
+    );
 }
 
-export default Home
+export default Home;
