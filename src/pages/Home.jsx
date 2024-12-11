@@ -1,4 +1,5 @@
 import { movies } from "../components/MovieList"
+import { Link, NavLink } from 'react-router-dom'
 
 function Home() {
     return (
@@ -12,7 +13,10 @@ function Home() {
                             <div className="card card-movies">
                                 <h4><div>{film.title}</div></h4>
                                 <div className="abstract px-2">{film.abstract}</div>
-                                <div className="btn btn-primary">{film.genre}</div>
+                                <div className="d-flex justify-content-between">
+                                    <div className="btn btn-warning">{film.genre}</div>
+                                    <NavLink to={`/${film.id}`} className="btn btn-primary">See More</NavLink>
+                                </div>
                             </div>
                         </div>)}
                 </div>
