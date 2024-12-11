@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function MovieReview({ onReviewsLoaded }) {
+function MovieSingle({ onMovieLoaded }) {
     const { id } = useParams();
-    const [reviews, setReviews] = useState([]);
+    const [movie, setMovie] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/movies/${id}/review`)
+        fetch(`http://localhost:3000/movies/${id}/`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Errore nel recupero delle recensioni');
+                    throw new Error('Errore nel recupero del film');
                 }
                 return response.json();
             })
             .then((data) => {
-                setReviews(data);
-                onReviewsLoaded(data);
+                setMovie(data);
+                onMovieLoaded(data);
             })
             .catch((error) => console.error(error));
-    }, [id, onReviewsLoaded]);
+    }, [id, onMovieLoaded]);
 
     return null;
 }
 
-export default MovieReview;
+export default MovieSingle;

@@ -1,19 +1,32 @@
-import React from 'react';
-import { useMovieReview } from '../components/MovieReview.jsx';
+import React, { useEffect, useState } from 'react';
+import MovieSingle from '../components/MovieSingle.jsx';
+import MovieReview from '../components/MovieReview.jsx';
 import { NavLink } from 'react-router-dom';
 
 function Movie() {
-    const { movie, reviews } = useMovieReview();
+    const [movie, setMovie] = useState(null);
+    const [reviews, setReviews] = useState([]);
+
+    const handleMovieLoaded = (movieData) => {
+        setMovie(movieData);
+    };
+
+    const handleReviewsLoaded = (reviewsData) => {
+        setReviews(reviewsData);
+    };
 
     return (
         <div className="container">
+            <MovieSingle onMovieLoaded={handleMovieLoaded} />
+            <MovieReview onReviewsLoaded={handleReviewsLoaded} />
+
             {movie ? (
                 <>
-                    <h1 className="mb-3">{movie.title}</h1>
-                    <p><strong>Director:</strong> {movie.director}</p>
-                    <p><strong>Genre:</strong> {movie.genre}</p>
-                    <p><strong>Abstract:</strong> {movie.abstract}</p>
-                    <p><strong>Release:</strong> {movie.release_year}</p>
+                    <h1 className="mb-3">{movie[0].title}</h1>
+                    <p><strong>Director:</strong> {movie[0].director}</p>
+                    <p><strong>Genre:</strong> {movie[0].genre}</p>
+                    <p><strong>Abstract:</strong> {movie[0].abstract}</p>
+                    <p><strong>Release:</strong> {movie[0].release_year}</p>
 
                     <h2>Reviews</h2>
                     {reviews.length > 0 ? (
@@ -31,7 +44,7 @@ function Movie() {
                     )}
                 </>
             ) : (
-                <p>Film non trovato.</p>
+                <p>Caricamento film...</p>
             )}
             <NavLink to="/" className="btn btn-primary">Indietro</NavLink>
         </div>
