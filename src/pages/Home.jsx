@@ -15,7 +15,7 @@ function Home() {
                                 <div className="abstract px-2">{film.abstract}</div>
                                 <div className="d-flex justify-content-between">
                                     <div className="btn btn-warning">{film.genre}</div>
-                                    <NavLink to={`/${film.id}`} className="btn btn-primary">See More</NavLink>
+                                    <NavLink to={`/${film.id}`} className="btn btn-primary">Scopri</NavLink>
                                 </div>
                             </div>
                         </div>)}
