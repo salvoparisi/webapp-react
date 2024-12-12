@@ -8,16 +8,8 @@ function Movie() {
 
     useEffect(() => {
         fetch(`http://localhost:3000/movies/${id}`)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Errore durante il recupero del film');
-                }
-                return res.json();
-            })
+            .then((res) => res.json())
             .then((data) => setMovie(data))
-            .catch((err) => {
-                console.error(err.message);
-            });
     }, [id]);
 
     console.log(movie);
