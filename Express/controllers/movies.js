@@ -19,9 +19,10 @@ const index = (req, res) => {
 }
 
 const show = (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
 
-    const sqlMovie = "SELECT * FROM `db-webapp`.movies WHERE id=?"
+    const sqlMovie = "SELECT * FROM `db-webapp`.movies WHERE id=?";
+    const sqlReviews = "SELECT * FROM `db-webapp`.reviews WHERE movie_id=?";
 
     connection.query(sqlMovie, [id], (err, movieResults) => {
         if (err) {
@@ -35,29 +36,29 @@ const show = (req, res) => {
             return;
         }
 
-        res.json(movieResults)
+        const movie = movieResults[0];
+
+        connection.query(sqlReviews, [id], (err, reviewResults) => {
+            if (err) {
+                console.error('Errore durante l\'esecuzione della query delle recensioni:', err.message);
+                res.status(500).send('Errore nel server');
+                return;
+            }
+
+            const response = {
+                ...movie,
+                reviews: reviewResults
+            };
+
+            res.json(response);
+        });
     });
 };
 
-const review = (req, res) => {
-    const id = req.params.id
 
-    const sqlReviews = `SELECT * From reviews WHERE movie_id=?`
-
-    connection.query(sqlReviews, [id], (err, reviewResults) => {
-        if (err) {
-            console.error('Errore durante l\'esecuzione della query delle recensioni:', err.message);
-            res.status(500).send('Errore nel server');
-            return;
-        }
-
-        res.json(reviewResults);
-    });
-}
 
 
 module.exports = {
     index,
     show,
-    review
 }
