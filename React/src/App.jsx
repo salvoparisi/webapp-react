@@ -1,5 +1,6 @@
 import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { FilmProvider } from './contexts/FilmContext'
 import React from "react"
 import Home from "./pages/Home.jsx"

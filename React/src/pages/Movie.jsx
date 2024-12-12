@@ -10,39 +10,67 @@ function Movie() {
         fetch(`http://localhost:3000/movies/${id}`)
             .then((res) => res.json())
             .then((data) => setMovie(data))
+            .catch((err) => console.error('Errore nel fetch:', err));
     }, [id]);
 
-    console.log(movie);
+    const renderStars = (vote) => {
+        const stars = [];
+        for (let i = 1; i <= vote; i++) {
+            stars.push(
+                <i class="bi bi-star-fill text-warning"></i>
+            );
+        }
+        return stars;
+    };
 
     return (
-        <div className="container">
+        <div className="container my-5">
             {movie ? (
-                <>
-                    <h1 className="mb-3">{movie.title}</h1>
-                    <p><strong>Director:</strong> {movie.director}</p>
-                    <p><strong>Genre:</strong> {movie.genre}</p>
-                    <p><strong>Abstract:</strong> {movie.abstract}</p>
-                    <p><strong>Release:</strong> {movie.release_year}</p>
+                <div className="card shadow-lg">
+                    <div className="card-header bg-primary text-white">
+                        <h1 className="mb-0">{movie.title}</h1>
+                    </div>
+                    <div className="card-body">
+                        <div className="row mb-3">
+                            <div className="col-md-6">
+                                <p><strong>Director:</strong> {movie.director}</p>
+                                <p><strong>Genre:</strong> {movie.genre}</p>
+                                <p><strong>Release:</strong> {movie.release_year}</p>
+                            </div>
+                            <div className="col-md-6">
+                                <p><strong>Abstract:</strong></p>
+                                <p>{movie.abstract}</p>
+                            </div>
+                        </div>
 
-                    <h2>Reviews</h2>
-                    {movie.reviews && movie.reviews.length > 0 ? (
-                        <ul>
-                            {movie.reviews.map((review) => (
-                                <li key={review.id}>
-                                    <p>
-                                        <strong>{review.name}</strong> ({review.vote}/5): {review.text}
-                                    </p>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Nessuna recensione disponibile.</p>
-                    )}
-                </>
+                        <h2 className="mb-4">Reviews</h2>
+                        {movie.reviews && movie.reviews.length > 0 ? (
+                            <ul className="list-group">
+                                {movie.reviews.map((review) => (
+                                    <li className="list-group-item" key={review.id}>
+                                        <p>
+                                            <strong>{review.name}</strong>: {renderStars(review.vote)}
+                                        </p>
+                                        <p>{review.text}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-muted">Nessuna recensione disponibile.</p>
+                        )}
+                    </div>
+                    <div className="card-footer text-end">
+                        <NavLink to="/" className="btn btn-primary">Indietro</NavLink>
+                    </div>
+                </div>
             ) : (
-                <p>Caricamento film...</p>
+                <div className="text-center my-5">
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Caricamento...</span>
+                    </div>
+                    <p className="mt-3">Caricamento film...</p>
+                </div>
             )}
-            <NavLink to="/" className="btn btn-primary">Indietro</NavLink>
         </div>
     );
 }
