@@ -22,7 +22,7 @@ const show = (req, res) => {
     const id = req.params.id;
 
     const sqlMovie = "SELECT * FROM `db-webapp`.movies WHERE id=?";
-    const sqlReviews = "SELECT * FROM `db-webapp`.reviews WHERE movie_id=?";
+    const sqlReviews = "SELECT * FROM `db-webapp`.reviews WHERE movie_id=? ORDER BY created_at DESC";
 
     connection.query(sqlMovie, [id], (err, movieResults) => {
         if (err) {
