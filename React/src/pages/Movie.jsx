@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AddReview from '../components/AddReview.jsx'
 import { NavLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -18,12 +19,12 @@ function Movie() {
         const diff = 5 - vote
         for (let i = 0; i < vote; i++) {
             stars.push(
-                <i class="bi bi-star-fill text-warning"></i>
+                <i className="bi bi-star-fill text-warning"></i>
             );
         }
         for (let i = 0; i < diff; i++) {
             stars.push(
-                <i class="bi bi-star text-warning"></i>
+                <i className="bi bi-star text-warning"></i>
             )
         }
 
@@ -51,6 +52,7 @@ function Movie() {
                         </div>
 
                         <h2 className="mb-4">Reviews</h2>
+                        <AddReview />
                         {movie.reviews && movie.reviews.length > 0 ? (
                             <ul className="list-group">
                                 {movie.reviews.map((review) => (
