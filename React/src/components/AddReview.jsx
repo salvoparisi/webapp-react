@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 function AddReview() {
-    const [username, setUsername] = useState('')
-    const [review, setReview] = useState('')
+    const [name, setName] = useState('')
+    const [text, setText] = useState('')
     const [rating, setRating] = useState(0)
 
     function HandleFormSubmit(e) {
         e.preventDefault();
         const formData = {
-            username,
-            review,
+            name,
+            text,
             vote: rating
         }
         console.log(formData);
@@ -25,8 +25,8 @@ function AddReview() {
 
                     <form onSubmit={HandleFormSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="username">User name</label>
-                            <input name="username" id="username" type="text" className="form-control" placeholder="mario" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                            <label htmlFor="name">User name</label>
+                            <input name="name" id="name" type="text" className="form-control" placeholder="mario" value={name} onChange={(e) => setName(e.target.value)} required />
                         </div>
 
                         <div className="rating mb-3 text-warning">
@@ -34,8 +34,8 @@ function AddReview() {
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="review">Your review</label>
-                            <textarea className="form-control" name="review" id="review" placeholder="leave your review here " value={review} onChange={(e) => setReview(e.target.value)} required></textarea>
+                            <label htmlFor="text">Your review</label>
+                            <textarea className="form-control" name="text" id="text" placeholder="leave your review here " value={text} onChange={(e) => setText(e.target.value)} required></textarea>
                         </div>
 
                         <div className="mb-3">

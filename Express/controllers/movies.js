@@ -55,10 +55,25 @@ const show = (req, res) => {
     });
 };
 
+const reviews = (req, res) => {
+
+    movie_id = req.params.id
+    const { name, vote, text } = req.body
+    const created_at = new Date()
+
+    const sql = "INSERT INTO `reviews` SET name=?, text=?, vote=?, movie_id=?, created_at=?"
+
+    connection.query(sql, [name, text, vote, movie_id, created_at], (err, result) => {
+        if (err) return res.status(500).json({ error: err })
+        return res.status(201).json({ success: true })
+    })
+}
+
 
 
 
 module.exports = {
     index,
     show,
+    reviews
 }
