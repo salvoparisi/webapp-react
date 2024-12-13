@@ -15,7 +15,7 @@ function Home() {
     const handleFilmSelect = (id) => {
         setSelectedFilmId(id);
     };
-    console.log(movie);
+
 
     return (
         <>

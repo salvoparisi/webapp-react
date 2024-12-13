@@ -19,12 +19,12 @@ function Movie() {
         const diff = 5 - vote
         for (let i = 0; i < vote; i++) {
             stars.push(
-                <i className="bi bi-star-fill text-warning"></i>
+                <i key={i} className="bi bi-star-fill text-warning"></i>
             );
         }
         for (let i = 0; i < diff; i++) {
             stars.push(
-                <i className="bi bi-star text-warning"></i>
+                <i key={i + 10} className="bi bi-star text-warning"></i>
             )
         }
 
