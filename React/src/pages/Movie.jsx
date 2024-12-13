@@ -15,11 +15,18 @@ function Movie() {
 
     const renderStars = (vote) => {
         const stars = [];
-        for (let i = 1; i <= vote; i++) {
+        const diff = 5 - vote
+        for (let i = 0; i < vote; i++) {
             stars.push(
                 <i class="bi bi-star-fill text-warning"></i>
             );
         }
+        for (let i = 0; i < diff; i++) {
+            stars.push(
+                <i class="bi bi-star text-warning"></i>
+            )
+        }
+
         return stars;
     };
 
