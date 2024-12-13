@@ -8,7 +8,6 @@ function AddReview() {
     const [rating, setRating] = useState(0)
 
     function HandleFormSubmit(e) {
-        e.preventDefault();
         if (rating === 0) {
             alert("inserire un voto");
         } else {
