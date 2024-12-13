@@ -1,18 +1,31 @@
 import { useState } from "react";
+import { useParams } from 'react-router-dom';
 
 function AddReview() {
+    const { id } = useParams()
     const [name, setName] = useState('')
     const [text, setText] = useState('')
     const [rating, setRating] = useState(0)
 
     function HandleFormSubmit(e) {
         e.preventDefault();
-        const formData = {
-            name,
-            text,
-            vote: rating
+        if (rating === 0) {
+            alert("inserire un voto");
+        } else {
+            const formData = {
+                name,
+                text,
+                vote: rating
+            }
+
+            fetch(`http://localhost:3000/movies/${id}/review`, {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: { "Content-Type": "application/json" }
+            })
+                .then(res => res.json)
+                .then(data => console.log(data))
         }
-        console.log(formData);
 
     }
 
