@@ -3,16 +3,21 @@ import { NavLink } from 'react-router-dom';
 import { useFilmContext } from '../contexts/FilmContext';
 import Loader from '../components/Loader';
 
+
 function Home() {
 
-    const { setSelectedFilmId } = useFilmContext();
+    const { setSelectedFilmId, isLoading, setIsLoading } = useFilmContext();
     const [movie, setMovie] = useState([])
 
     useEffect(() => {
+        setIsLoading(true)
         fetch('http://localhost:3000/movies/')
             .then((res) => res.json())
-            .then((data) => setMovie(data))
-    }, [])
+            .then((data) => {
+                setMovie(data);
+                setIsLoading(false);
+            })
+    }, [setIsLoading])
 
     const handleFilmSelect = (id) => {
         setSelectedFilmId(id);
@@ -24,9 +29,12 @@ function Home() {
             <h1 className="text-center bg-primary text-white py-3">Home</h1>
             <h3 className="text-center text-primary mb-5">Movie List</h3>
             <div className="container">
-                {movie ? (
+                {isLoading ? (
+                    <Loader />
+                ) : movie.lenght > 0 ? (
+                    <h2 className='text-center'>Nessun Film Trovato</h2>
+                ) : (
                     <div className="row">
-
 
                         {movie.map((film, i) => (
                             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={i}>
@@ -48,10 +56,6 @@ function Home() {
                         ))}
 
                     </div>
-                ) : movie.lenght > 0 ? (
-                    <h2 className='text-center'>Nessun Film Trovato</h2>
-                ) : (
-                    <Loader />
                 )}
             </div>
         </>

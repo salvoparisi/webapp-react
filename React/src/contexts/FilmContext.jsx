@@ -4,9 +4,9 @@ const FilmContext = createContext();
 
 export const FilmProvider = ({ children }) => {
     const [selectedFilmId, setSelectedFilmId] = useState(null);
-
+    const [isLoading, setIsLoading] = useState(false)
     return (
-        <FilmContext.Provider value={{ selectedFilmId, setSelectedFilmId, Loader }}>
+        <FilmContext.Provider value={{ selectedFilmId, setSelectedFilmId, isLoading, setIsLoading }}>
             {children}
         </FilmContext.Provider>
     );
