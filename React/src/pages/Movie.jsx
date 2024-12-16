@@ -73,11 +73,8 @@ function Movie() {
                     </div>
                 </div>
             ) : (
-                <div className="text-center my-5">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Caricamento...</span>
-                    </div>
-                    <p className="mt-3">Caricamento film...</p>
+                <div class="spinner-border text-primary text-center" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
             )}
         </div>

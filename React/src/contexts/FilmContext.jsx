@@ -6,7 +6,7 @@ export const FilmProvider = ({ children }) => {
     const [selectedFilmId, setSelectedFilmId] = useState(null);
 
     return (
-        <FilmContext.Provider value={{ selectedFilmId, setSelectedFilmId }}>
+        <FilmContext.Provider value={{ selectedFilmId, setSelectedFilmId, Loader }}>
             {children}
         </FilmContext.Provider>
     );
