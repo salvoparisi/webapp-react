@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useFilmContext } from '../contexts/FilmContext';
+import Loader from '../components/Loader';
 
 function Home() {
 
@@ -50,9 +51,7 @@ function Home() {
                 ) : movie.lenght > 0 ? (
                     <h2 className='text-center'>Nessun Film Trovato</h2>
                 ) : (
-                    <div class="spinner-border text-primary text-center" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
+                    <Loader />
                 )}
             </div>
         </>

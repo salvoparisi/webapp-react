@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddReview from '../components/AddReview.jsx'
 import { NavLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Loader from '../components/Loader.jsx';
 
 function Movie() {
     const { id } = useParams();
@@ -73,9 +74,7 @@ function Movie() {
                     </div>
                 </div>
             ) : (
-                <div class="spinner-border text-primary text-center" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
+                <Loader />
             )}
         </div>
     );
